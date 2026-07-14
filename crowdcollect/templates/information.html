@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ project_name }}{% endblock %}
+{% block content %}
+<section class="card info-card">
+  <p class="eyebrow">Research demo</p>
+  <h1>{{ project_name }}</h1>
+  <p class="lead">{{ description }}</p>
+
+  <div class="notice">
+    <h2>What will happen</h2>
+    <ol>
+      <li>Your browser will ask for camera access. Audio will not be recorded.</li>
+      <li>You will follow a short sequence of face, hand, and arm prompts.</li>
+      <li>Your video will be sent to the research team's private Telegram chat.</li>
+    </ol>
+  </div>
+
+  <h2>Your choice and your data</h2>
+  <p>Taking part is voluntary. You can stop before submitting by closing this page. The
+     demo does not ask for your name, but video can identify you. Telegram will store the
+     submitted recording under its own service terms. This demo has no separate database.</p>
+  <p>This is not a medical test and the prompts should not cause pain. Skip the session if
+     any movement feels unsafe or uncomfortable. Questions: {{ contact }}.</p>
+
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+  <form method="post" action="{{ url_for('consent') }}">
+    <label class="consent-row">
+      <input type="checkbox" name="consent" value="yes" required>
+      <span>I am 18 or older, I have read the information above, and I voluntarily consent
+        to recording and sharing my video with the research team through Telegram.</span>
+    </label>
+    <button type="submit" class="primary-button">I consent — continue</button>
+  </form>
+</section>
+{% endblock %}

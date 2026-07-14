@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Record movement session{% endblock %}
+{% block content %}
+<section class="recording-card">
+  <header class="recording-header">
+    <div>
+      <p class="eyebrow">Guided recording</p>
+      <h1>Movement session</h1>
+    </div>
+    <span id="status-pill" class="status-pill">Camera off</span>
+  </header>
+
+  <div class="recording-grid">
+    <div class="camera-panel">
+      <div class="video-frame">
+        <video id="preview" autoplay muted playsinline></video>
+        <div id="camera-placeholder" class="camera-placeholder">
+          <span>Camera preview</span>
+        </div>
+        <div id="recording-dot" class="recording-dot" hidden>REC</div>
+      </div>
+      <p class="privacy-note">Video only. No microphone audio is requested.</p>
+    </div>
+
+    <aside class="prompt-panel">
+      <div id="movement-demo" class="movement-demo demo-position" role="img" aria-labelledby="demo-title">
+        <span id="demo-title" class="visually-hidden">Position yourself in the camera frame</span>
+        <svg viewBox="0 0 240 170" aria-hidden="true" focusable="false">
+          <rect class="demo-backdrop" x="1" y="1" width="238" height="168" rx="20" />
+
+          <g class="movement-scene scene-position">
+            <path class="frame-corner" d="M54 48V30h20 M166 30h20v18 M54 122v18h20 M186 122v18h-20" />
+            <circle class="figure-fill" cx="120" cy="65" r="25" />
+            <path class="figure-line" d="M80 143c4-35 20-51 40-51s36 16 40 51" />
+            <path class="motion-line pulse-ring" d="M120 23a42 42 0 1 1 0 84 42 42 0 0 1 0-84Z" />
+          </g>
+
+          <g class="movement-scene scene-smile">
+            <circle class="figure-fill" cx="120" cy="76" r="47" />
+            <circle class="feature-fill" cx="103" cy="68" r="3.5" />
+            <circle class="feature-fill" cx="137" cy="68" r="3.5" />
+            <path class="figure-line smile-mouth" d="M96 86c8 21 40 21 48 0" />
+            <path class="motion-line cheek cheek-left" d="M85 83l-9 3 M88 91l-8 7" />
+            <path class="motion-line cheek cheek-right" d="M155 83l9 3 M152 91l8 7" />
+          </g>
+
+          <g class="movement-scene scene-palm">
+            <path class="figure-line" d="M50 143c5-29 20-43 40-43 16 0 28 8 35 23" />
+            <circle class="figure-fill" cx="91" cy="68" r="25" />
+            <g class="animated-palm">
+              <rect class="figure-fill" x="143" y="65" width="36" height="45" rx="15" />
+              <path class="figure-line" d="M148 69V39 M157 66V31 M167 66V34 M176 70V43 M146 89l-15-14c-5-5-12 2-7 8l23 28v24" />
+              <path class="motion-line" d="M132 48c-9 6-14 15-15 24 M184 43c8 7 12 16 11 26" />
+            </g>
+          </g>
+
+          <g class="movement-scene scene-fist">
+            <path class="figure-line" d="M48 143c5-29 20-43 40-43 17 0 30 9 36 24" />
+            <circle class="figure-fill" cx="89" cy="68" r="25" />
+            <g class="open-hand">
+              <rect class="figure-fill" x="149" y="68" width="35" height="42" rx="14" />
+              <path class="figure-line" d="M153 71V42 M162 68V34 M172 69V38 M181 73V49 M151 90l-13-12" />
+            </g>
+            <g class="closed-fist">
+              <rect class="figure-fill" x="145" y="63" width="43" height="42" rx="14" />
+              <path class="figure-line" d="M150 76h33 M153 89h29 M164 64v25 M176 65v24 M151 100v30" />
+            </g>
+            <path class="motion-line fist-arrow" d="M132 42c12-11 29-15 44-10l-7-8 M176 32l-9 5" />
+          </g>
+
+          <g class="movement-scene scene-arm">
+            <circle class="figure-fill" cx="93" cy="63" r="25" />
+            <path class="figure-line" d="M55 143c4-34 18-52 38-52 18 0 31 13 37 39" />
+            <g class="raising-arm">
+              <path class="figure-line" d="M120 104l25-35 13-42" />
+              <circle class="figure-fill" cx="160" cy="21" r="8" />
+            </g>
+            <path class="motion-line arm-arc" d="M126 104c31-11 49-39 46-70" />
+          </g>
+
+          <g class="movement-scene scene-generic">
+            <circle class="figure-fill" cx="120" cy="60" r="27" />
+            <path class="figure-line" d="M76 144c5-37 21-55 44-55s39 18 44 55 M92 105l-30 22 M148 105l30 22" />
+            <path class="motion-line generic-motion" d="M53 107c-8 8-10 18-7 29 M187 107c8 8 10 18 7 29" />
+          </g>
+        </svg>
+        <span class="demo-caption">Example movement</span>
+      </div>
+      <div class="prompt-copy">
+        <p id="step-label" class="step-label">Before you begin</p>
+        <h2 id="prompt-text">Position your face and upper body inside the frame.</h2>
+        <p id="prompt-help">Keep the device steady. Only perform movements that feel safe.</p>
+      </div>
+      <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+      <div class="button-stack">
+        <button id="camera-button" class="primary-button" type="button">Enable camera</button>
+        <button id="start-button" class="primary-button" type="button" hidden>Start recording</button>
+        <button id="next-button" class="primary-button" type="button" hidden>Next movement</button>
+        <button id="finish-button" class="primary-button" type="button" hidden>Finish &amp; send</button>
+        <button id="retry-button" class="secondary-button" type="button" hidden>Record again</button>
+      </div>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </aside>
+  </div>
+</section>
+<script id="tasks-data" type="application/json">{{ tasks | tojson }}</script>
+<script src="{{ url_for('static', filename='record.js') }}" defer></script>
+{% endblock %}

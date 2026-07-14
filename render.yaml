@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: crowdcollect
+    runtime: python
+    plan: free
+    buildCommand: pip install .
+    startCommand: gunicorn --workers 2 --threads 4 --timeout 150 --bind 0.0.0.0:$PORT crowdcollect.app:app
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: PROJECT_NAME
+        value: CrowdCollect Movement Demo
+      - key: PROJECT_DESCRIPTION
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false

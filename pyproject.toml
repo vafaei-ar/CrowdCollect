@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crowdcollect"
+version = "0.1.0"
+description = "Consent-first guided movement video collection demo"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "Flask>=3.1,<4",
+  "gunicorn>=23,<24",
+  "requests>=2.32,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.12,<1",
+]
+
+[project.scripts]
+crowdcollect-chat-id = "crowdcollect.chat_id:main"
+
+[tool.setuptools.packages.find]
+include = ["crowdcollect*"]
+
+[tool.setuptools.package-data]
+crowdcollect = ["templates/*.html", "static/*.css", "static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
