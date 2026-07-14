@@ -13,6 +13,7 @@ a clinical assessment tool.
 
 - requires an explicit consent checkbox before camera access;
 - requests video-only camera access (the microphone is not requested);
+- overlays a face-and-shoulder alignment guide on the preview for consistent framing;
 - records a guided session with configurable prompts and animated movement sketches;
 - adapts the camera, guidance, and controls for portrait and landscape phones;
 - uploads the result to a configured Telegram chat;

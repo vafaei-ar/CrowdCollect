@@ -50,6 +50,8 @@ def test_consent_opens_recording_page(client):
     assert b"show your open palm" in page.data
     assert b'id="movement-demo"' in page.data
     assert b"Example movement" in page.data
+    assert b"Align face inside oval" in page.data
+    assert b"CLOSE TO FIST" in page.data
 
 
 @patch("crowdcollect.app.requests.post")
