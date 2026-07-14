@@ -17,6 +17,15 @@
         <div id="camera-placeholder" class="camera-placeholder">
           <span>Camera preview</span>
         </div>
+        <div class="alignment-guide" aria-hidden="true">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+            <path class="guide-shade" fill-rule="evenodd" d="M0 0h400v300H0Zm200 25c-42 0-70 36-70 87 0 50 28 86 70 86s70-36 70-86c0-51-28-87-70-87Z" />
+            <ellipse class="guide-oval" cx="200" cy="112" rx="70" ry="87" />
+            <path class="guide-shoulders" d="M82 284c15-54 58-83 118-83s103 29 118 83" />
+            <path class="guide-center" d="M200 18v14 M200 193v14" />
+          </svg>
+          <span>Align face inside oval</span>
+        </div>
         <div id="recording-dot" class="recording-dot" hidden>REC</div>
       </div>
       <p class="privacy-note">Video only. No microphone audio is requested.</p>
@@ -45,27 +54,26 @@
           </g>
 
           <g class="movement-scene scene-palm">
-            <path class="figure-line" d="M50 143c5-29 20-43 40-43 16 0 28 8 35 23" />
-            <circle class="figure-fill" cx="91" cy="68" r="25" />
             <g class="animated-palm">
-              <rect class="figure-fill" x="143" y="65" width="36" height="45" rx="15" />
-              <path class="figure-line" d="M148 69V39 M157 66V31 M167 66V34 M176 70V43 M146 89l-15-14c-5-5-12 2-7 8l23 28v24" />
-              <path class="motion-line" d="M132 48c-9 6-14 15-15 24 M184 43c8 7 12 16 11 26" />
+              <path class="hand-shape" d="M83 145v-42l-14-20c-6-9 6-18 13-9l12 15V53c0-10 13-10 13 0v27-39c0-10 13-10 13 0v39-34c0-10 13-10 13 0v37-27c0-10 13-10 13 0v48c0 27-14 41-38 41Z" />
+              <path class="palm-detail" d="M96 98c14-11 30-11 47-2 M107 81v18 M120 80v17 M133 83v16" />
+              <path class="motion-line" d="M69 45c-9 7-14 17-14 29 M154 43c9 8 14 18 14 30" />
             </g>
+            <text class="demo-action-label" x="120" y="160">SHOW OPEN PALM</text>
           </g>
 
           <g class="movement-scene scene-fist">
-            <path class="figure-line" d="M48 143c5-29 20-43 40-43 17 0 30 9 36 24" />
-            <circle class="figure-fill" cx="89" cy="68" r="25" />
-            <g class="open-hand">
-              <rect class="figure-fill" x="149" y="68" width="35" height="42" rx="14" />
-              <path class="figure-line" d="M153 71V42 M162 68V34 M172 69V38 M181 73V49 M151 90l-13-12" />
+            <g class="fist-step fist-step-open">
+              <path class="hand-shape" d="M83 137v-39L70 80c-6-8 5-17 12-8l11 14V51c0-9 12-9 12 0v27-39c0-9 12-9 12 0v39-34c0-9 12-9 12 0v37-25c0-9 12-9 12 0v44c0 25-13 37-35 37Z" />
+              <path class="palm-detail" d="M95 95c13-10 27-10 43-2" />
+              <text class="demo-action-label" x="120" y="158">1  OPEN HAND</text>
             </g>
-            <g class="closed-fist">
-              <rect class="figure-fill" x="145" y="63" width="43" height="42" rx="14" />
-              <path class="figure-line" d="M150 76h33 M153 89h29 M164 64v25 M176 65v24 M151 100v30" />
+            <g class="fist-step fist-step-closed">
+              <path class="fist-shape" d="M72 76c0-13 10-23 23-23h51c14 0 24 11 24 25v34c0 23-17 37-40 37h-22c-23 0-38-15-38-37V92c0-6 1-11 2-16Z" />
+              <path class="fist-detail" d="M79 76h82 M92 57v32 M111 55v34 M131 55v34 M151 59v30 M80 99c20-13 48-10 67 4l12 9 M91 101v22c0 8 6 14 14 14" />
+              <text class="demo-action-label" x="120" y="163">2  CLOSE TO FIST</text>
             </g>
-            <path class="motion-line fist-arrow" d="M132 42c12-11 29-15 44-10l-7-8 M176 32l-9 5" />
+            <path class="motion-line fist-arrow" d="M52 28h136l-12-9 M188 28l-12 9" />
           </g>
 
           <g class="movement-scene scene-arm">
