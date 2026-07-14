@@ -52,6 +52,9 @@ def test_consent_opens_recording_page(client):
     assert b"Example movement" in page.data
     assert b"Align face inside oval" in page.data
     assert b"CLOSE TO FIST" in page.data
+    assert b'id="countdown-overlay"' in page.data
+    assert b"No audio is recorded" in page.data
+    assert b'aria-label="Live camera preview"' in page.data
 
 
 @patch("crowdcollect.app.requests.post")

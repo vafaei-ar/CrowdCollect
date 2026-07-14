@@ -2,6 +2,7 @@ const preview = document.querySelector("#preview");
 const placeholder = document.querySelector("#camera-placeholder");
 const statusPill = document.querySelector("#status-pill");
 const recordingDot = document.querySelector("#recording-dot");
+const countdownOverlay = document.querySelector("#countdown-overlay");
 const stepLabel = document.querySelector("#step-label");
 const promptText = document.querySelector("#prompt-text");
 const promptHelp = document.querySelector("#prompt-help");
@@ -30,6 +31,10 @@ function supportedMimeType() {
 function showError(text) {
   message.textContent = text;
   message.classList.add("error");
+}
+
+function wait(milliseconds) {
+  return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 }
 
 function demoForTask(task) {
@@ -78,7 +83,7 @@ async function enableCamera() {
     cameraButton.hidden = true;
     startButton.hidden = false;
     statusPill.textContent = "Camera ready";
-    statusPill.classList.add("ready");
+    statusPill.className = "status-pill ready";
     promptText.textContent = "When you are ready, start the guided recording.";
     setDemo("position", "Position yourself in the camera frame");
   } catch (error) {
@@ -86,22 +91,32 @@ async function enableCamera() {
   }
 }
 
-function startRecording() {
+async function startRecording() {
   chunks = [];
   taskIndex = 0;
   message.textContent = "";
   message.classList.remove("error");
+  startButton.hidden = true;
+  retryButton.hidden = true;
+  statusPill.textContent = "Get ready";
+  statusPill.className = "status-pill ready";
+  for (const count of [3, 2, 1]) {
+    countdownOverlay.textContent = count;
+    countdownOverlay.hidden = false;
+    await wait(700);
+  }
+  countdownOverlay.textContent = "Go";
+  await wait(350);
+  countdownOverlay.hidden = true;
   const mimeType = supportedMimeType();
   recorder = mimeType ? new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 1_200_000 }) : new MediaRecorder(stream);
   recorder.addEventListener("dataavailable", (event) => {
     if (event.data.size > 0) chunks.push(event.data);
   });
   recorder.start(1000);
-  startButton.hidden = true;
-  retryButton.hidden = true;
   recordingDot.hidden = false;
   statusPill.textContent = "Recording";
-  statusPill.classList.add("recording");
+  statusPill.className = "status-pill recording";
   updateTask();
   autoStopTimer = window.setTimeout(() => finishRecording(true), 90_000);
 }

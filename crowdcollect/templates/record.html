@@ -13,10 +13,8 @@
   <div class="recording-grid">
     <div class="camera-panel">
       <div class="video-frame">
-        <video id="preview" autoplay muted playsinline></video>
-        <div id="camera-placeholder" class="camera-placeholder">
-          <span>Camera preview</span>
-        </div>
+        <video id="preview" aria-label="Live camera preview" autoplay muted playsinline></video>
+        <div id="camera-placeholder" class="camera-placeholder" aria-hidden="true"></div>
         <div class="alignment-guide" aria-hidden="true">
           <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
             <path class="guide-shade" fill-rule="evenodd" d="M0 0h400v300H0Zm200 25c-42 0-70 36-70 87 0 50 28 86 70 86s70-36 70-86c0-51-28-87-70-87Z" />
@@ -26,9 +24,10 @@
           </svg>
           <span>Align face inside oval</span>
         </div>
+        <div id="countdown-overlay" class="countdown-overlay" aria-live="assertive" hidden></div>
         <div id="recording-dot" class="recording-dot" hidden>REC</div>
       </div>
-      <p class="privacy-note">Video only. No microphone audio is requested.</p>
+      <p class="privacy-note">Camera only · No audio is recorded</p>
     </div>
 
     <aside class="prompt-panel">
